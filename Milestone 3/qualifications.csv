@@ -1,0 +1,101 @@
+qual_id,faculty_id,degree,institution,year_completed
+1,1,BS,IBA Karachi,2016
+2,2,BE,Hazara University,1996
+3,3,MS,Hazara University,2001
+4,4,MSc,UMT Lahore,1999
+5,5,MPhil,Mehran UET Jamshoro,2006
+6,6,MEd,IBA Karachi,2005
+7,7,BE,University of Punjab,2001
+8,8,MSc,Quaid-i-Azam University,2002
+9,9,MS,Mehran UET Jamshoro,2017
+10,10,MPhil,Mehran UET Jamshoro,2003
+11,11,MSc,University of Agriculture Faisalabad,2000
+12,12,MBA,Hazara University,2004
+13,13,PhD,University of Peshawar,2009
+14,14,MSc,FAST-NUCES Karachi,2006
+15,15,PhD,Bahria University,2019
+16,16,MPhil,Hazara University,2012
+17,17,MSc,Abdul Wali Khan University,1997
+18,18,MPhil,Bahria University,2019
+19,19,MPhil,Abdul Wali Khan University,2006
+20,20,MBA,UET Lahore,1995
+21,21,MS,Mehran UET Jamshoro,1998
+22,22,BS,LUMS Lahore,2016
+23,23,BS,BZU Multan,2011
+24,24,MEd,FAST-NUCES Karachi,2014
+25,25,MS,University of Agriculture Faisalabad,2013
+26,26,BE,University of Punjab,2006
+27,27,BE,University of Karachi,2017
+28,28,PhD,University of Karachi,2020
+29,29,MPhil,University of Punjab,2017
+30,30,MSc,BZU Multan,2001
+31,31,MBA,BZU Multan,2010
+32,32,PhD,LUMS Lahore,2001
+33,33,BS,University of Agriculture Faisalabad,2003
+34,34,PhD,IBA Karachi,2001
+35,35,MS,COMSATS University Islamabad,2007
+36,36,MPhil,Abdul Wali Khan University,2008
+37,37,MPhil,NED University Karachi,2013
+38,38,BS,LUMS Lahore,2020
+39,39,MS,COMSATS University Islamabad,1997
+40,40,BE,Mehran UET Jamshoro,1999
+41,41,MBA,University of Peshawar,1997
+42,42,MS,Bahria University,2002
+43,43,MSc,Mehran UET Jamshoro,2001
+44,44,BE,BZU Multan,2008
+45,45,BE,IBA Karachi,2009
+46,46,MPhil,University of Punjab,1999
+47,47,BS,University of Agriculture Faisalabad,2010
+48,48,MSc,UMT Lahore,2017
+49,49,BS,UMT Lahore,1997
+50,50,PhD,NED University Karachi,2010
+51,51,PhD,University of Agriculture Faisalabad,2016
+52,52,BS,Abdul Wali Khan University,1996
+53,53,MBA,COMSATS University Islamabad,2009
+54,54,BS,Mehran UET Jamshoro,1995
+55,55,MBA,University of Punjab,1997
+56,56,MBA,Abdul Wali Khan University,2015
+57,57,BS,IBA Karachi,1999
+58,58,MBA,GCU Lahore,2007
+59,59,BE,COMSATS University Islamabad,2013
+60,60,MEd,NUST Islamabad,2019
+61,61,MBA,University of Lahore,2012
+62,62,BS,UET Lahore,1995
+63,63,BE,Abdul Wali Khan University,2005
+64,64,MBA,Quaid-i-Azam University,2006
+65,65,MS,University of Punjab,2010
+66,66,MSc,University of Agriculture Faisalabad,2006
+67,67,BS,IBA Karachi,1995
+68,68,MS,BZU Multan,2011
+69,69,PhD,University of Peshawar,2018
+70,70,BE,University of Peshawar,2004
+71,71,MEd,NUST Islamabad,2020
+72,72,PhD,Mehran UET Jamshoro,2000
+73,73,MPhil,LUMS Lahore,2015
+74,74,BS,GCU Lahore,1996
+75,75,MBA,Quaid-i-Azam University,2013
+76,76,MEd,BZU Multan,2013
+77,77,BS,NUST Islamabad,2001
+78,78,MS,Mehran UET Jamshoro,2011
+79,79,MPhil,NED University Karachi,2000
+80,80,MEd,GCU Lahore,1998
+81,61,MS,Bahria University,2010
+82,65,BE,LUMS Lahore,1999
+83,15,BE,Mehran UET Jamshoro,2016
+84,58,BS,NUST Islamabad,2017
+85,19,MBA,University of Punjab,2016
+86,8,MEd,UET Lahore,2006
+87,68,PhD,FAST-NUCES Karachi,2021
+88,20,BS,UET Lahore,2009
+89,51,BE,FAST-NUCES Karachi,2006
+90,30,BE,University of Lahore,2021
+91,29,MEd,Bahria University,2019
+92,33,MEd,UMT Lahore,2003
+93,18,MEd,COMSATS University Islamabad,2007
+94,76,MSc,IBA Karachi,2015
+95,3,MPhil,University of Karachi,2021
+96,69,MS,Abdul Wali Khan University,2007
+97,36,MSc,NUST Islamabad,2006
+98,23,BE,LUMS Lahore,2004
+99,31,MS,COMSATS University Islamabad,2003
+100,52,BE,NUST Islamabad,2005

@@ -1,0 +1,101 @@
+workload_id,faculty_id,course_name,credit_hours,semester
+1,13,Sports Medicine,4,Fall 2024
+2,56,Media Law,3,Fall 2024
+3,65,Human Resource Management,3,Spring 2025
+4,20,Python for Data Science,3,Fall 2024
+5,14,Power Electronics,3,Fall 2025
+6,56,Journalism Fundamentals,4,Fall 2024
+7,63,Reinforcement Learning,3,Fall 2024
+8,70,Bioreactor Design,3,Spring 2025
+9,16,Media Ethics,3,Fall 2024
+10,78,Introduction to Sociology,3,Fall 2024
+11,45,Discourse Analysis,4,Spring 2025
+12,28,Manufacturing Processes,3,Fall 2025
+13,58,Inclusive Education,3,Fall 2024
+14,78,Social Psychology,3,Spring 2025
+15,16,Media Studies,2,Fall 2025
+16,44,Inventory Control,3,Spring 2025
+17,39,Illustration,2,Fall 2025
+18,17,Social Entrepreneurship,2,Fall 2024
+19,42,Financial Management,4,Spring 2025
+20,25,Educational Psychology,3,Fall 2024
+21,23,Comparative Politics,4,Fall 2024
+22,6,Telemedicine,3,Fall 2024
+23,4,Cloud Computing,3,Spring 2025
+24,48,Inorganic Chemistry,3,Fall 2025
+25,54,Antenna Theory,4,Fall 2025
+26,36,Telemedicine,2,Fall 2024
+27,44,Supply Chain Management,2,Fall 2024
+28,10,Malware Analysis,4,Fall 2025
+29,7,Startup Ecosystems,3,Spring 2025
+30,29,Environmental Law,2,Fall 2025
+31,77,E-Commerce Systems,3,Fall 2024
+32,57,Microcontroller Interfacing,3,Spring 2025
+33,33,Branding & Identity,3,Fall 2024
+34,40,Healthcare Analytics,3,Spring 2025
+35,45,Phonetics,4,Fall 2025
+36,67,Land Use Management,3,Fall 2025
+37,71,Antenna Theory,3,Spring 2025
+38,75,Advertising,3,Fall 2025
+39,34,Transportation Engineering,3,Fall 2025
+40,39,Illustration,3,Spring 2025
+41,34,Geotechnical Engineering,2,Spring 2025
+42,39,Graphic Design Fundamentals,3,Spring 2025
+43,75,Consumer Behavior,2,Spring 2025
+44,52,Screenplay Writing,2,Spring 2025
+45,60,Arabic Communication,3,Spring 2025
+46,7,Entrepreneurship,3,Fall 2025
+47,75,Market Research,4,Fall 2025
+48,28,Engineering Mechanics,2,Fall 2024
+49,41,Creative Writing,3,Fall 2025
+50,76,IT Project Management,3,Fall 2024
+51,43,Political Economy,2,Spring 2025
+52,13,Sports Science,3,Spring 2025
+53,27,Monetary Economics,2,Fall 2024
+54,19,Interior Design,4,Fall 2025
+55,28,CAD/CAM,3,Spring 2025
+56,38,Clinical Informatics,3,Fall 2024
+57,44,Procurement,2,Fall 2024
+58,25,Learning Theories,3,Spring 2025
+59,52,Media Production,3,Fall 2024
+60,37,Business Law,4,Spring 2025
+61,12,Assistive Technology,2,Spring 2025
+62,43,Political Economy,3,Fall 2024
+63,72,Data Structures,3,Spring 2025
+64,24,Transportation Engineering,3,Spring 2025
+65,9,Educational Research,3,Fall 2024
+66,61,Machine Design,3,Spring 2025
+67,79,Inventory Control,4,Fall 2024
+68,62,Differential Equations,2,Fall 2024
+69,75,Advertising,3,Fall 2024
+70,38,Clinical Informatics,4,Spring 2025
+71,50,Wireless Communications,4,Fall 2024
+72,40,Health Data Management,2,Fall 2024
+73,75,Marketing Management,3,Fall 2024
+74,49,Signal Processing,3,Fall 2025
+75,50,Wireless Communications,3,Fall 2025
+76,57,Embedded C Programming,3,Spring 2025
+77,28,Fluid Mechanics,2,Fall 2025
+78,62,Numerical Methods,2,Spring 2025
+79,10,Ethical Hacking,3,Spring 2025
+80,5,Urban Sociology,2,Fall 2025
+81,42,Managerial Accounting,3,Fall 2025
+82,46,E-Commerce Systems,3,Fall 2025
+83,76,Web Technologies,3,Fall 2025
+84,3,Data Mining,3,Spring 2025
+85,1,Anatomy & Physiology,4,Spring 2025
+86,70,Genetics,2,Spring 2025
+87,15,Human Resource Management,3,Spring 2025
+88,22,Python for Data Science,3,Fall 2024
+89,51,Macroeconomics,3,Fall 2025
+90,42,Financial Accounting,3,Fall 2024
+91,32,Medical Coding,3,Fall 2025
+92,8,Sequence Analysis,4,Fall 2025
+93,15,Talent Management,3,Fall 2025
+94,77,IT Security,2,Fall 2024
+95,20,Data Visualization,3,Spring 2025
+96,23,Public Policy,2,Fall 2024
+97,18,E-Commerce Systems,3,Fall 2025
+98,36,Clinical Informatics,4,Fall 2025
+99,26,Auditing,4,Spring 2025
+100,2,Diplomacy,3,Fall 2025

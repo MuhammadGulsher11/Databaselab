@@ -1,0 +1,51 @@
+dept_id,dept_name,hod_name
+1,Computer Science,Dr. Tariq Mahmood
+2,Software Engineering,Dr. Sana Mirza
+3,Information Technology,Dr. Kamran Shah
+4,Artificial Intelligence,Dr. Hira Baig
+5,Cyber Security,Dr. Waqar Hussain
+6,Data Science,Dr. Amna Raza
+7,Electrical Engineering,Dr. Fahad Iqbal
+8,Electronics Engineering,Dr. Zubair Khan
+9,Telecommunication Engineering,Dr. Omar Qureshi
+10,Embedded Systems,Dr. Salman Abbasi
+11,Mechanical Engineering,Dr. Imran Sheikh
+12,Industrial Engineering,Dr. Hassan Naqvi
+13,Mechatronics Engineering,Dr. Bilal Zaidi
+14,Aerospace Engineering,Dr. Saad Hashmi
+15,Civil Engineering,Dr. Amna Khalid
+16,Environmental Engineering,Dr. Nadia Gillani
+17,Urban & Regional Planning,Dr. Rabia Farooqui
+18,Architecture,Dr. Sara Rizvi
+19,Mathematics,Dr. Nadia Hussain
+20,Applied Mathematics,Dr. Usman Raza
+21,Statistics,Dr. Mahnoor Siddiqui
+22,Physics,Dr. Iqra Chaudhry
+23,Chemistry,Dr. Zainab Ahmed
+24,Biochemistry,Dr. Maryam Malik
+25,Biotechnology,Dr. Aiman Butt
+26,Bioinformatics,Dr. Fatima Nawaz
+27,Business Administration,Dr. Ayesha Siddiqui
+28,Accounting & Finance,Dr. Hira Javed
+29,Marketing Management,Dr. Sara Baig
+30,Human Resource Management,Dr. Noor Ahmed
+31,Supply Chain Management,Dr. Sadia Mirza
+32,Entrepreneurship,Dr. Iqra Hussain
+33,Economics,Dr. Hamza Khan
+34,Sociology,Dr. Rabia Raza
+35,Psychology,Dr. Mahnoor Iqbal
+36,Political Science,Dr. Omar Sheikh
+37,International Relations,Dr. Zainab Chaudhry
+38,Public Administration,Dr. Nadia Butt
+39,English & Linguistics,Dr. Rabia Nawaz
+40,Urdu Language & Literature,Dr. Amna Javed
+41,Arabic Studies,Dr. Hassan Siddiqui
+42,Education,Dr. Sana Qureshi
+43,Special Education,Dr. Fatima Hashmi
+44,Physical Education,Dr. Bilal Gillani
+45,Mass Communication,Dr. Sara Zaidi
+46,Journalism,Dr. Maryam Rizvi
+47,Graphic Design,Dr. Hira Farooqui
+48,Film & Media Studies,Dr. Aiman Nawaz
+49,Public Health,Dr. Zainab Abbasi
+50,Health Informatics,Dr. Noor Hashmi
