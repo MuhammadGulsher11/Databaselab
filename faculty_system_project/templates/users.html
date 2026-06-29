@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}Users — FIS{% endblock %}
+{% block page_title %}Users{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1>System Users</h1>
+        <p>{{ users|length }} user(s) registered</p>
+    </div>
+    <a href="{{ url_for('user_add') }}" class="btn btn-primary">➕ Add User</a>
+</div>
+
+<div class="card">
+    {% if users %}
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>Linked Faculty</th>
+                    <th>Last Login</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for u in users %}
+                <tr>
+                    <td style="color:var(--muted); font-size:12px;">{{ u.user_id }}</td>
+                    <td>
+                        <div style="display:flex; align-items:center; gap:10px;">
+                            <div style="
+                                width:32px; height:32px; border-radius:50%;
+                                background:linear-gradient(135deg,var(--accent),var(--accent2));
+                                display:flex; align-items:center; justify-content:center;
+                                font-family:'Syne',sans-serif; font-weight:700; font-size:13px; color:#fff;
+                                flex-shrink:0;
+                            ">{{ u.username[0]|upper }}</div>
+                            <span style="font-weight:600;">{{ u.username }}</span>
+                            {% if u.user_id == session.user_id %}
+                            <span class="badge badge-green" style="font-size:10px;">You</span>
+                            {% endif %}
+                        </div>
+                    </td>
+                    <td>
+                        {% if u.role == 'admin' %}
+                            <span class="badge badge-purple">🛡 Admin</span>
+                        {% else %}
+                            <span class="badge badge-blue">👨‍🏫 Faculty</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if u.faculty_name %}
+                            <a href="{{ url_for('faculty_view', fid=u.faculty_id) }}"
+                               style="color:var(--accent); text-decoration:none;">{{ u.faculty_name }}</a>
+                        {% else %}
+                            <span style="color:var(--muted);">—</span>
+                        {% endif %}
+                    </td>
+                    <td style="color:var(--muted); font-size:12px;">
+                        {{ u.last_login.strftime('%d %b %Y %H:%M') if u.last_login else 'Never' }}
+                    </td>
+                    <td>
+                        {% if u.user_id != session.user_id %}
+                        <form method="POST" action="{{ url_for('user_delete', uid=u.user_id) }}"
+                              class="confirm-delete"
+                              onsubmit="return confirm('Delete user {{ u.username }}?')">
+                            <button type="submit" class="btn btn-danger btn-sm btn-icon">🗑</button>
+                        </form>
+                        {% else %}
+                        <span style="color:var(--muted); font-size:12px;">Current session</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <div class="icon">👤</div>
+        <p>No users found.</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

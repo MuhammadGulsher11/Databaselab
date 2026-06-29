@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}Qualifications — FIS{% endblock %}
+{% block page_title %}Qualifications{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1>Qualifications</h1>
+        <p>{{ qualifications|length }} record(s) found</p>
+    </div>
+    {% if session.role == 'admin' %}
+    <a href="{{ url_for('qual_add') }}" class="btn btn-primary">➕ Add Qualification</a>
+    {% endif %}
+</div>
+
+<form method="GET" class="filter-bar">
+    <div class="search-input">
+        <span class="search-icon">🔍</span>
+        <input type="text" name="search" class="form-control"
+               placeholder="Search faculty, degree, institution..." value="{{ search }}">
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+    <a href="{{ url_for('qualifications') }}" class="btn btn-outline">Clear</a>
+</form>
+
+<div class="card">
+    {% if qualifications %}
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Faculty</th>
+                    <th>Degree</th>
+                    <th>Institution</th>
+                    <th>Year</th>
+                    {% if session.role == 'admin' %}<th>Actions</th>{% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for q in qualifications %}
+                <tr>
+                    <td style="color:var(--muted); font-size:12px;">{{ q.qual_id }}</td>
+                    <td>
+                        <a href="{{ url_for('faculty_view', fid=q.faculty_id) }}"
+                           style="color:var(--accent); text-decoration:none; font-weight:500;">
+                            {{ q.faculty_name }}
+                        </a>
+                    </td>
+                    <td><span class="badge badge-purple">{{ q.degree }}</span></td>
+                    <td style="color:var(--muted);">{{ q.institution }}</td>
+                    <td>
+                        {% if q.year_completed %}
+                            <span class="badge badge-blue">{{ q.year_completed }}</span>
+                        {% else %}
+                            <span style="color:var(--muted);">—</span>
+                        {% endif %}
+                    </td>
+                    {% if session.role == 'admin' %}
+                    <td>
+                        <div style="display:flex; gap:6px;">
+                            <a href="{{ url_for('qual_edit', qid=q.qual_id) }}"
+                               class="btn btn-outline btn-sm btn-icon">✏️</a>
+                            <form method="POST" action="{{ url_for('qual_delete', qid=q.qual_id) }}"
+                                  class="confirm-delete"
+                                  onsubmit="return confirm('Delete this qualification?')">
+                                <button type="submit" class="btn btn-danger btn-sm btn-icon">🗑</button>
+                            </form>
+                        </div>
+                    </td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <div class="icon">🎓</div>
+        <p>No qualifications found.</p>
+        {% if session.role == 'admin' %}
+        <a href="{{ url_for('qual_add') }}" class="btn btn-primary mt-4">Add First Qualification</a>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

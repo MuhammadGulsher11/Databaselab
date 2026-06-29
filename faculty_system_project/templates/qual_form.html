@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}{{ action }} Qualification — FIS{% endblock %}
+{% block page_title %}{{ action }} Qualification{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1>{{ action }} Qualification</h1>
+        <p>{% if action == 'Add' %}Add a new degree record.{% else %}Update qualification details.{% endif %}</p>
+    </div>
+    <a href="{{ url_for('qualifications') }}" class="btn btn-outline">← Back</a>
+</div>
+
+<div class="card" style="max-width:560px;">
+    <div class="card-header"><span class="card-title">Qualification Details</span></div>
+    <div class="card-body">
+        <form method="POST">
+            <div class="form-group">
+                <label class="form-label">Faculty Member *</label>
+                <select name="faculty_id" class="form-control" required>
+                    <option value="">— Select Faculty —</option>
+                    {% for f in faculty_list %}
+                    <option value="{{ f.faculty_id }}"
+                        {% if qual and qual.faculty_id == f.faculty_id %}selected{% endif %}>
+                        {{ f.name }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Degree *</label>
+                <input type="text" name="degree" class="form-control"
+                       value="{{ qual.degree if qual else '' }}"
+                       placeholder="e.g. PhD Computer Science" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Institution *</label>
+                <input type="text" name="institution" class="form-control"
+                       value="{{ qual.institution if qual else '' }}"
+                       placeholder="e.g. University of Punjab" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Year Completed</label>
+                <input type="number" name="year_completed" class="form-control"
+                       value="{{ qual.year_completed if qual and qual.year_completed else '' }}"
+                       placeholder="e.g. 2018" min="1900" max="2099">
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    {% if action == 'Add' %}➕ Add Qualification{% else %}💾 Save Changes{% endif %}
+                </button>
+                <a href="{{ url_for('qualifications') }}" class="btn btn-outline">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

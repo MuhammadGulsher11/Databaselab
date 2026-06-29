@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}{{ action }} Workload — FIS{% endblock %}
+{% block page_title %}{{ action }} Workload{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1>{{ action }} Workload Entry</h1>
+        <p>{% if action == 'Add' %}Assign a course to a faculty member.{% else %}Update workload details.{% endif %}</p>
+    </div>
+    <a href="{{ url_for('workload') }}" class="btn btn-outline">← Back</a>
+</div>
+
+<div class="card" style="max-width:560px;">
+    <div class="card-header"><span class="card-title">Course Assignment</span></div>
+    <div class="card-body">
+        <form method="POST">
+            <div class="form-group">
+                <label class="form-label">Faculty Member *</label>
+                <select name="faculty_id" class="form-control" required>
+                    <option value="">— Select Faculty —</option>
+                    {% for f in faculty_list %}
+                    <option value="{{ f.faculty_id }}"
+                        {% if wl and wl.faculty_id == f.faculty_id %}selected{% endif %}>
+                        {{ f.name }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Course Name *</label>
+                <input type="text" name="course_name" class="form-control"
+                       value="{{ wl.course_name if wl else '' }}"
+                       placeholder="e.g. Database Systems" required>
+            </div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Credit Hours *</label>
+                    <select name="credit_hours" class="form-control" required>
+                        <option value="">— Select —</option>
+                        {% for i in range(1, 7) %}
+                        <option value="{{ i }}"
+                            {% if wl and wl.credit_hours == i %}selected{% endif %}>
+                            {{ i }} Credit Hour{{ 's' if i > 1 else '' }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Semester *</label>
+                    <input type="text" name="semester" class="form-control"
+                           value="{{ wl.semester if wl else '' }}"
+                           placeholder="e.g. Fall-2024" required>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    {% if action == 'Add' %}➕ Add Workload{% else %}💾 Save Changes{% endif %}
+                </button>
+                <a href="{{ url_for('workload') }}" class="btn btn-outline">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

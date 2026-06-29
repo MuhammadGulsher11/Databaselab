@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% block title %}{{ faculty.name }} — FIS{% endblock %}
+{% block page_title %}Faculty Profile{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1>{{ faculty.name }}</h1>
+        <p>{{ faculty.dept_name }} · {{ faculty.gender }}</p>
+    </div>
+    <div style="display:flex; gap:10px;">
+        {% if session.role == 'admin' %}
+        <a href="{{ url_for('faculty_edit', fid=faculty.faculty_id) }}" class="btn btn-primary">✏️ Edit</a>
+        {% endif %}
+        <a href="{{ url_for('faculty_list') }}" class="btn btn-outline">← Back</a>
+    </div>
+</div>
+
+<div style="display:grid; grid-template-columns:1fr 2fr; gap:24px;">
+
+    <!-- Info card -->
+    <div>
+        <div class="card">
+            <div class="card-header"><span class="card-title">Profile</span></div>
+            <div class="card-body">
+                <div style="text-align:center; margin-bottom:20px;">
+                    <div style="
+                        width:80px; height:80px; border-radius:50%;
+                        background:linear-gradient(135deg,var(--accent),var(--accent2));
+                        display:flex; align-items:center; justify-content:center;
+                        font-family:'Syne',sans-serif; font-weight:800; font-size:32px;
+                        color:#fff; margin:0 auto 12px;
+                    ">{{ faculty.name[0]|upper }}</div>
+                    <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:18px;">{{ faculty.name }}</div>
+                    <div style="color:var(--muted); font-size:13px; margin-top:4px;">{{ faculty.email }}</div>
+                </div>
+                <hr class="divider">
+                <div style="font-size:13px; line-height:2;">
+                    <div style="display:flex; justify-content:space-between;">
+                        <span style="color:var(--muted);">Faculty ID</span>
+                        <span style="font-weight:600;">#{{ faculty.faculty_id }}</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between;">
+                        <span style="color:var(--muted);">CNIC</span>
+                        <span style="font-family:monospace; font-size:12px;">{{ faculty.cnic }}</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between;">
+                        <span style="color:var(--muted);">Phone</span>
+                        <span>{{ faculty.phone or '—' }}</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between;">
+                        <span style="color:var(--muted);">Gender</span>
+                        <span>{{ faculty.gender }}</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between;">
+                        <span style="color:var(--muted);">DOB</span>
+                        <span>{{ faculty.date_of_birth or '—' }}</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between;">
+                        <span style="color:var(--muted);">Dept</span>
+                        <span class="badge badge-blue">{{ faculty.dept_name }}</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between;">
+                        <span style="color:var(--muted);">Joined</span>
+                        <span style="font-size:12px;">{{ faculty.created_at.strftime('%d %b %Y') if faculty.created_at else '—' }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right side -->
+    <div>
+        <!-- Qualifications -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <span class="card-title">🎓 Qualifications ({{ qualifications|length }})</span>
+                {% if session.role == 'admin' %}
+                <a href="{{ url_for('qual_add') }}" class="btn btn-outline btn-sm">+ Add</a>
+                {% endif %}
+            </div>
+            {% if qualifications %}
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Degree</th><th>Institution</th><th>Year</th>{% if session.role == 'admin' %}<th></th>{% endif %}</tr>
+                    </thead>
+                    <tbody>
+                        {% for q in qualifications %}
+                        <tr>
+                            <td><span class="badge badge-purple">{{ q.degree }}</span></td>
+                            <td style="color:var(--muted);">{{ q.institution }}</td>
+                            <td style="color:var(--muted);">{{ q.year_completed or '—' }}</td>
+                            {% if session.role == 'admin' %}
+                            <td>
+                                <div style="display:flex; gap:4px;">
+                                    <a href="{{ url_for('qual_edit', qid=q.qual_id) }}" class="btn btn-outline btn-sm btn-icon">✏️</a>
+                                    <form method="POST" action="{{ url_for('qual_delete', qid=q.qual_id) }}"
+                                          onsubmit="return confirm('Delete this qualification?')">
+                                        <button type="submit" class="btn btn-danger btn-sm btn-icon">🗑</button>
+                                    </form>
+                                </div>
+                            </td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="empty-state" style="padding:30px;"><p>No qualifications recorded.</p></div>
+            {% endif %}
+        </div>
+
+        <!-- Workload -->
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">📚 Workload ({{ workload|length }})</span>
+                {% if session.role == 'admin' %}
+                <a href="{{ url_for('workload_add') }}" class="btn btn-outline btn-sm">+ Add</a>
+                {% endif %}
+            </div>
+            {% if workload %}
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Course</th><th>Credits</th><th>Semester</th>{% if session.role == 'admin' %}<th></th>{% endif %}</tr>
+                    </thead>
+                    <tbody>
+                        {% for w in workload %}
+                        <tr>
+                            <td style="font-weight:500;">{{ w.course_name }}</td>
+                            <td><span class="badge badge-orange">{{ w.credit_hours }} cr</span></td>
+                            <td style="color:var(--muted); font-size:13px;">{{ w.semester }}</td>
+                            {% if session.role == 'admin' %}
+                            <td>
+                                <div style="display:flex; gap:4px;">
+                                    <a href="{{ url_for('workload_edit', wid=w.workload_id) }}" class="btn btn-outline btn-sm btn-icon">✏️</a>
+                                    <form method="POST" action="{{ url_for('workload_delete', wid=w.workload_id) }}"
+                                          onsubmit="return confirm('Delete this workload entry?')">
+                                        <button type="submit" class="btn btn-danger btn-sm btn-icon">🗑</button>
+                                    </form>
+                                </div>
+                            </td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="empty-state" style="padding:30px;"><p>No workload assigned.</p></div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

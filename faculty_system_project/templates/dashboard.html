@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — FIS{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1>Welcome back, {{ session.username }} 👋</h1>
+        <p>Here's what's happening in your system today.</p>
+    </div>
+</div>
+
+<!-- Stats -->
+<div class="stats-grid">
+    <div class="stat-card" style="--glow:rgba(79,142,247,.1);">
+        <div class="stat-label">Total Faculty</div>
+        <div class="stat-value" style="color:var(--accent);">{{ stats.faculty }}</div>
+        <div class="stat-icon">👨‍🏫</div>
+    </div>
+    <div class="stat-card" style="--glow:rgba(124,92,252,.1);">
+        <div class="stat-label">Departments</div>
+        <div class="stat-value" style="color:var(--accent2);">{{ stats.departments }}</div>
+        <div class="stat-icon">🏛️</div>
+    </div>
+    <div class="stat-card" style="--glow:rgba(46,204,113,.1);">
+        <div class="stat-label">Qualifications</div>
+        <div class="stat-value" style="color:var(--success);">{{ stats.qualifications }}</div>
+        <div class="stat-icon">🎓</div>
+    </div>
+    <div class="stat-card" style="--glow:rgba(243,156,18,.1);">
+        <div class="stat-label">Workload Entries</div>
+        <div class="stat-value" style="color:var(--warning);">{{ stats.workload }}</div>
+        <div class="stat-icon">📚</div>
+    </div>
+</div>
+
+<!-- Two columns -->
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+
+    <!-- Recent Faculty -->
+    <div class="card">
+        <div class="card-header">
+            <span class="card-title">Recent Faculty</span>
+            <a href="{{ url_for('faculty_list') }}" class="btn btn-outline btn-sm">View All</a>
+        </div>
+        {% if recent_faculty %}
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Department</th>
+                        <th>Gender</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for f in recent_faculty %}
+                    <tr>
+                        <td>
+                            <a href="{{ url_for('faculty_view', fid=f.faculty_id) }}"
+                               style="color:var(--accent); text-decoration:none; font-weight:500;">
+                                {{ f.name }}
+                            </a>
+                            <div style="font-size:11px; color:var(--muted);">{{ f.email }}</div>
+                        </td>
+                        <td><span class="badge badge-blue">{{ f.dept_name }}</span></td>
+                        <td>
+                            {% if f.gender == 'Male' %}
+                                <span class="badge badge-blue">♂ Male</span>
+                            {% else %}
+                                <span class="badge badge-purple">♀ Female</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="empty-state"><div class="icon">👨‍🏫</div><p>No faculty records yet.</p></div>
+        {% endif %}
+    </div>
+
+    <!-- Department Headcount -->
+    <div class="card">
+        <div class="card-header">
+            <span class="card-title">Faculty by Department</span>
+            <a href="{{ url_for('departments') }}" class="btn btn-outline btn-sm">Manage</a>
+        </div>
+        <div class="card-body">
+            {% if dept_counts %}
+                {% set max_val = dept_counts[0].total if dept_counts[0].total > 0 else 1 %}
+                {% for d in dept_counts %}
+                <div style="margin-bottom:16px;">
+                    <div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:6px;">
+                        <span style="font-weight:500;">{{ d.dept_name }}</span>
+                        <span style="color:var(--muted);">{{ d.total }}</span>
+                    </div>
+                    <div style="background:var(--surface2); border-radius:999px; height:6px; overflow:hidden;">
+                        <div style="
+                            height:100%;
+                            width:{{ ((d.total / max_val) * 100)|int }}%;
+                            background:linear-gradient(90deg, var(--accent), var(--accent2));
+                            border-radius:999px;
+                            transition:width .5s ease;
+                        "></div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+            <div class="empty-state"><div class="icon">🏛️</div><p>No departments yet.</p></div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Quick links -->
+{% if session.role == 'admin' %}
+<div class="card mt-4">
+    <div class="card-header">
+        <span class="card-title">Quick Actions</span>
+    </div>
+    <div class="card-body" style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="{{ url_for('faculty_add') }}"    class="btn btn-primary">➕ Add Faculty</a>
+        <a href="{{ url_for('dept_add') }}"       class="btn btn-outline">🏛️ Add Department</a>
+        <a href="{{ url_for('qual_add') }}"       class="btn btn-outline">🎓 Add Qualification</a>
+        <a href="{{ url_for('workload_add') }}"   class="btn btn-outline">📚 Add Workload</a>
+        <a href="{{ url_for('user_add') }}"       class="btn btn-outline">👤 Add User</a>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

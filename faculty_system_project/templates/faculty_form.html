@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}{{ action }} Faculty — FIS{% endblock %}
+{% block page_title %}{{ action }} Faculty{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1>{{ action }} Faculty Member</h1>
+        <p>{% if action == 'Add' %}Create a new faculty record.{% else %}Update existing faculty details.{% endif %}</p>
+    </div>
+    <a href="{{ url_for('faculty_list') }}" class="btn btn-outline">← Back</a>
+</div>
+
+<div class="card" style="max-width:720px;">
+    <div class="card-header">
+        <span class="card-title">Personal Information</span>
+    </div>
+    <div class="card-body">
+        <form method="POST">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Full Name *</label>
+                    <input type="text" name="name" class="form-control"
+                           value="{{ faculty.name if faculty else '' }}"
+                           placeholder="e.g. Dr. Ahmed Khan" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email *</label>
+                    <input type="email" name="email" class="form-control"
+                           value="{{ faculty.email if faculty else '' }}"
+                           placeholder="name@university.edu.pk" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">CNIC *</label>
+                    <input type="text" name="cnic" class="form-control"
+                           value="{{ faculty.cnic if faculty else '' }}"
+                           placeholder="XXXXX-XXXXXXX-X" pattern="[0-9]{5}-[0-9]{7}-[0-9]"
+                           title="Format: XXXXX-XXXXXXX-X" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Phone</label>
+                    <input type="text" name="phone" class="form-control"
+                           value="{{ faculty.phone if faculty else '' }}"
+                           placeholder="+92-300-0000000">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Gender *</label>
+                    <select name="gender" class="form-control" required>
+                        <option value="">— Select —</option>
+                        <option value="Male"   {% if faculty and faculty.gender == 'Male'   %}selected{% endif %}>Male</option>
+                        <option value="Female" {% if faculty and faculty.gender == 'Female' %}selected{% endif %}>Female</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Date of Birth</label>
+                    <input type="date" name="dob" class="form-control"
+                           value="{{ faculty.date_of_birth if faculty and faculty.date_of_birth else '' }}">
+                </div>
+                <div class="form-group" style="grid-column:span 2;">
+                    <label class="form-label">Department *</label>
+                    <select name="dept_id" class="form-control" required>
+                        <option value="">— Select Department —</option>
+                        {% for d in departments %}
+                        <option value="{{ d.dept_id }}"
+                            {% if faculty and faculty.dept_id == d.dept_id %}selected{% endif %}>
+                            {{ d.dept_name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    {% if action == 'Add' %}➕ Add Faculty{% else %}💾 Save Changes{% endif %}
+                </button>
+                <a href="{{ url_for('faculty_list') }}" class="btn btn-outline">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

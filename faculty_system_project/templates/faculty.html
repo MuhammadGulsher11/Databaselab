@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block title %}Faculty — FIS{% endblock %}
+{% block page_title %}Faculty{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1>Faculty Members</h1>
+        <p>{{ faculty|length }} record(s) found</p>
+    </div>
+    {% if session.role == 'admin' %}
+    <a href="{{ url_for('faculty_add') }}" class="btn btn-primary">➕ Add Faculty</a>
+    {% endif %}
+</div>
+
+<!-- Filters -->
+<form method="GET" class="filter-bar">
+    <div class="search-input">
+        <span class="search-icon">🔍</span>
+        <input type="text" name="search" class="form-control"
+               placeholder="Search name, email, CNIC..." value="{{ search }}">
+    </div>
+    <select name="dept" class="form-control" style="max-width:200px;">
+        <option value="">All Departments</option>
+        {% for d in departments %}
+        <option value="{{ d.dept_id }}" {% if dept_filter == d.dept_id|string %}selected{% endif %}>
+            {{ d.dept_name }}
+        </option>
+        {% endfor %}
+    </select>
+    <select name="gender" class="form-control" style="max-width:140px;">
+        <option value="">All Genders</option>
+        <option value="Male"   {% if gender_filter == 'Male'   %}selected{% endif %}>Male</option>
+        <option value="Female" {% if gender_filter == 'Female' %}selected{% endif %}>Female</option>
+    </select>
+    <button type="submit" class="btn btn-primary">Filter</button>
+    <a href="{{ url_for('faculty_list') }}" class="btn btn-outline">Clear</a>
+</form>
+
+<div class="card">
+    {% if faculty %}
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>CNIC</th>
+                    <th>Gender</th>
+                    <th>Department</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for f in faculty %}
+                <tr>
+                    <td style="color:var(--muted); font-size:12px;">{{ f.faculty_id }}</td>
+                    <td>
+                        <a href="{{ url_for('faculty_view', fid=f.faculty_id) }}"
+                           style="color:var(--accent); text-decoration:none; font-weight:600;">
+                            {{ f.name }}
+                        </a>
+                        {% if f.phone %}
+                        <div style="font-size:11px; color:var(--muted);">📞 {{ f.phone }}</div>
+                        {% endif %}
+                    </td>
+                    <td style="color:var(--muted); font-size:13px;">{{ f.email }}</td>
+                    <td style="font-family:monospace; font-size:12px; color:var(--muted);">{{ f.cnic }}</td>
+                    <td>
+                        {% if f.gender == 'Male' %}
+                            <span class="badge badge-blue">♂ Male</span>
+                        {% else %}
+                            <span class="badge badge-purple">♀ Female</span>
+                        {% endif %}
+                    </td>
+                    <td><span class="badge badge-green">{{ f.dept_name }}</span></td>
+                    <td>
+                        <div style="display:flex; gap:6px;">
+                            <a href="{{ url_for('faculty_view', fid=f.faculty_id) }}"
+                               class="btn btn-outline btn-sm btn-icon" title="View">👁</a>
+                            {% if session.role == 'admin' %}
+                            <a href="{{ url_for('faculty_edit', fid=f.faculty_id) }}"
+                               class="btn btn-outline btn-sm btn-icon" title="Edit">✏️</a>
+                            <form method="POST" action="{{ url_for('faculty_delete', fid=f.faculty_id) }}"
+                                  class="confirm-delete"
+                                  onsubmit="return confirm('Delete {{ f.name }}? This cannot be undone.')">
+                                <button type="submit" class="btn btn-danger btn-sm btn-icon" title="Delete">🗑</button>
+                            </form>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <div class="icon">👨‍🏫</div>
+        <p>No faculty members found.</p>
+        {% if session.role == 'admin' %}
+        <a href="{{ url_for('faculty_add') }}" class="btn btn-primary mt-4">Add First Faculty</a>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

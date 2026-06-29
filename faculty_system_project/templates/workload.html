@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block title %}Workload — FIS{% endblock %}
+{% block page_title %}Workload{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1>Faculty Workload</h1>
+        <p>{{ workloads|length }} assignment(s) found</p>
+    </div>
+    {% if session.role == 'admin' %}
+    <a href="{{ url_for('workload_add') }}" class="btn btn-primary">➕ Add Workload</a>
+    {% endif %}
+</div>
+
+<form method="GET" class="filter-bar">
+    <div class="search-input">
+        <span class="search-icon">🔍</span>
+        <input type="text" name="search" class="form-control"
+               placeholder="Search faculty or course..." value="{{ search }}">
+    </div>
+    <select name="semester" class="form-control" style="max-width:180px;">
+        <option value="">All Semesters</option>
+        {% for s in semesters %}
+        <option value="{{ s }}" {% if semester_filter == s %}selected{% endif %}>{{ s }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit" class="btn btn-primary">Filter</button>
+    <a href="{{ url_for('workload') }}" class="btn btn-outline">Clear</a>
+</form>
+
+<div class="card">
+    {% if workloads %}
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Faculty</th>
+                    <th>Course Name</th>
+                    <th>Credit Hours</th>
+                    <th>Semester</th>
+                    {% if session.role == 'admin' %}<th>Actions</th>{% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for w in workloads %}
+                <tr>
+                    <td style="color:var(--muted); font-size:12px;">{{ w.workload_id }}</td>
+                    <td>
+                        <a href="{{ url_for('faculty_view', fid=w.faculty_id) }}"
+                           style="color:var(--accent); text-decoration:none; font-weight:500;">
+                            {{ w.faculty_name }}
+                        </a>
+                    </td>
+                    <td style="font-weight:500;">📖 {{ w.course_name }}</td>
+                    <td>
+                        <span class="badge
+                            {% if w.credit_hours >= 3 %}badge-green
+                            {% elif w.credit_hours == 2 %}badge-orange
+                            {% else %}badge-blue{% endif %}">
+                            {{ w.credit_hours }} cr
+                        </span>
+                    </td>
+                    <td><span class="badge badge-purple">{{ w.semester }}</span></td>
+                    {% if session.role == 'admin' %}
+                    <td>
+                        <div style="display:flex; gap:6px;">
+                            <a href="{{ url_for('workload_edit', wid=w.workload_id) }}"
+                               class="btn btn-outline btn-sm btn-icon">✏️</a>
+                            <form method="POST" action="{{ url_for('workload_delete', wid=w.workload_id) }}"
+                                  class="confirm-delete"
+                                  onsubmit="return confirm('Delete this workload entry?')">
+                                <button type="submit" class="btn btn-danger btn-sm btn-icon">🗑</button>
+                            </form>
+                        </div>
+                    </td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <div class="icon">📚</div>
+        <p>No workload entries found.</p>
+        {% if session.role == 'admin' %}
+        <a href="{{ url_for('workload_add') }}" class="btn btn-primary mt-4">Add First Entry</a>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

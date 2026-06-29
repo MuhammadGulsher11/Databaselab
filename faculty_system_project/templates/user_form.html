@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Add User — FIS{% endblock %}
+{% block page_title %}Add User{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1>Add New User</h1>
+        <p>Create login credentials for admin or faculty portal access.</p>
+    </div>
+    <a href="{{ url_for('users') }}" class="btn btn-outline">← Back</a>
+</div>
+
+<div class="card" style="max-width:500px;">
+    <div class="card-header"><span class="card-title">User Credentials</span></div>
+    <div class="card-body">
+        <form method="POST">
+            <div class="form-group">
+                <label class="form-label">Username *</label>
+                <input type="text" name="username" class="form-control"
+                       placeholder="e.g. dr.ahmed" required autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Password *</label>
+                <input type="password" name="password" class="form-control"
+                       placeholder="Min 6 characters" required minlength="6">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Role *</label>
+                <select name="role" class="form-control" required id="roleSelect"
+                        onchange="toggleFaculty(this.value)">
+                    <option value="">— Select Role —</option>
+                    <option value="admin">🛡 Admin</option>
+                    <option value="faculty">👨‍🏫 Faculty</option>
+                </select>
+            </div>
+            <div class="form-group" id="facultyGroup" style="display:none;">
+                <label class="form-label">Link to Faculty Record</label>
+                <select name="faculty_id" class="form-control" id="facultySelect">
+                    <option value="">— Select Faculty —</option>
+                    {% for f in faculty_list %}
+                    <option value="{{ f.faculty_id }}">{{ f.name }}</option>
+                    {% endfor %}
+                </select>
+                <div style="font-size:12px; color:var(--muted); margin-top:6px;">
+                    Required for faculty-role users.
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">➕ Create User</button>
+                <a href="{{ url_for('users') }}" class="btn btn-outline">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function toggleFaculty(role) {
+    const g = document.getElementById('facultyGroup');
+    const s = document.getElementById('facultySelect');
+    if (role === 'faculty') {
+        g.style.display = 'block';
+        s.required = true;
+    } else {
+        g.style.display = 'none';
+        s.required = false;
+    }
+}
+</script>
+{% endblock %}

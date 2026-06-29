@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Departments — FIS{% endblock %}
+{% block page_title %}Departments{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1>Departments</h1>
+        <p>{{ departments|length }} department(s) registered</p>
+    </div>
+    {% if session.role == 'admin' %}
+    <a href="{{ url_for('dept_add') }}" class="btn btn-primary">➕ Add Department</a>
+    {% endif %}
+</div>
+
+<div class="card">
+    {% if departments %}
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Department Name</th>
+                    <th>Head of Department</th>
+                    <th>Faculty Count</th>
+                    {% if session.role == 'admin' %}<th>Actions</th>{% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in departments %}
+                <tr>
+                    <td style="color:var(--muted); font-size:12px;">{{ d.dept_id }}</td>
+                    <td style="font-weight:600;">🏛️ {{ d.dept_name }}</td>
+                    <td style="color:var(--muted);">{{ d.hod_name or '—' }}</td>
+                    <td>
+                        <span class="badge {% if d.faculty_count > 0 %}badge-green{% else %}badge-orange{% endif %}">
+                            {{ d.faculty_count }} faculty
+                        </span>
+                    </td>
+                    {% if session.role == 'admin' %}
+                    <td>
+                        <div style="display:flex; gap:6px;">
+                            <a href="{{ url_for('dept_edit', did=d.dept_id) }}"
+                               class="btn btn-outline btn-sm btn-icon" title="Edit">✏️</a>
+                            <form method="POST" action="{{ url_for('dept_delete', did=d.dept_id) }}"
+                                  class="confirm-delete"
+                                  onsubmit="return confirm('Delete {{ d.dept_name }}? Only possible if no faculty are assigned.')">
+                                <button type="submit" class="btn btn-danger btn-sm btn-icon" title="Delete">🗑</button>
+                            </form>
+                        </div>
+                    </td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <div class="icon">🏛️</div>
+        <p>No departments found.</p>
+        {% if session.role == 'admin' %}
+        <a href="{{ url_for('dept_add') }}" class="btn btn-primary mt-4">Add First Department</a>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
